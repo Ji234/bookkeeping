@@ -9,10 +9,11 @@ import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
 
 public class MyViewPager extends ViewPager {
+    //重写构造方法
     public MyViewPager(@NonNull Context context) {
         super(context);
     }
-
+    //
     public MyViewPager(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }

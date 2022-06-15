@@ -33,10 +33,14 @@ import java.util.Map;
  * 账单Fragment
  */
 public class BIllFragment extends BaseFragment {
+    //饼图
     private PieChart pieChart;
+    //列表头
     private MyListView billListview;
+    //列表下面的内容
     private XListAdapter<BillVO> adapter;
 
+    //主要页面
     public BIllFragment() {
         super(R.layout.fragment_bill);
     }
@@ -44,7 +48,7 @@ public class BIllFragment extends BaseFragment {
     @Override
     public boolean isDisplay() {
         boolean display = super.isDisplay();
-        Log.i("TAG", "display=" + display);
+//        Log.i("TAG", "display=" + display);
         return display;
     }
 
@@ -88,7 +92,7 @@ public class BIllFragment extends BaseFragment {
     private Collection<BillVO> initData() {
         BookUtils bookUtils = new BookUtils(SqlLiteUtils.getInstance(getContext()));
 
-        return bookUtils.data2BillVO(bookUtils.readData()).values();
+        return bookUtils.dataToBillVO(bookUtils.readData()).values();
 
     }
 

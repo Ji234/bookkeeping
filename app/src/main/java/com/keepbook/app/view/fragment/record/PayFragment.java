@@ -35,8 +35,10 @@ public class PayFragment extends BaseFragment {
     }
 
     private Integer mPos = -1;
+    //开始结束
     private float startX = 0;
     private float endX = 0;
+    //第几页
     static int page = 1;
 
     @Override
@@ -47,12 +49,13 @@ public class PayFragment extends BaseFragment {
 
         recPay.setAdapter(new XRecyclerAdapter<IconTitleItem, IconItemViewHolder>(iconTitleItems) {
 
-
+            //翻页
             @NonNull
             @Override
             protected IconItemViewHolder getViewHolder(@NonNull ViewGroup parent, int viewType) {
 
                 parent.setOnTouchListener(new View.OnTouchListener() {
+                    //翻页
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
 
@@ -68,8 +71,8 @@ public class PayFragment extends BaseFragment {
                             case MotionEvent.ACTION_UP:
                                 parent.setTranslationX(0);
                                 endX = event.getRawX();
-                                Log.i("TAG", "startX-endX=" + (startX - endX));
-                                if (startX - endX > 100) {
+//                                Log.i("TAG", "startX-endX=" + (startX - endX));
+                                if (startX - endX > 200) {
 
                                     page++;
                                     if (page > maxPage()) {
@@ -79,11 +82,20 @@ public class PayFragment extends BaseFragment {
 
                                     refresh(iconTitleItems.subList((page - 1) * 12, (page - 1) * 12 + 12));
                                     mPos = -1;
+                                }if (startX - endX < -200){
+
+                                    page--;
+                                    if (page < 1) {
+                                        page = maxPage();
+                                    }
+                                    notifyCirclerChanged(page);
+
+                                    refresh(iconTitleItems.subList((page - 1) * 12, (page - 1) * 12 + 12));
+                                    mPos = -1;
                                 }else{
 //                                    滑动条件不满足 继续分发
                                     return false;
                                 }
-
                                 break;
                         }
                         return true;
@@ -117,9 +129,9 @@ public class PayFragment extends BaseFragment {
                     @Override
                     public void onClick(View v) {
                         mPos = position;
-                        Log.i("TAG", "getContext().getClass()=" + getContext().getClass());
-                        Log.i("TAG", "PayFragment.this.getParentFragment()=" + PayFragment.this.getParentFragment());
-                        Log.i("TAG", "PayFragment.this.getContext()=" + PayFragment.this.getContext());
+//                        Log.i("TAG", "getContext().getClass()=" + getContext().getClass());
+//                        Log.i("TAG", "PayFragment.this.getParentFragment()=" + PayFragment.this.getParentFragment());
+//                        Log.i("TAG", "PayFragment.this.getContext()=" + PayFragment.this.getContext());
                         ((MainActivity) getContext()).setCategory(item.getTitle());
 
                         notifyDataSetChanged();

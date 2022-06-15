@@ -3,8 +3,8 @@ package com.keepbook.app.model.dto;
 import java.util.Date;
 import java.util.Objects;
 
-public class
-KeepBookDTO {
+//KeepBookDTO类,写入数据
+public class KeepBookDTO {
     private Integer id;
     private String category;
     private Double money;
@@ -49,29 +49,6 @@ KeepBookDTO {
         return category;
     }
 
-    @Override
-    public String toString() {
-        return "KeepBookDTO{" +
-                "id=" + id +
-                ", category='" + category + '\'' +
-                ", money=" + money +
-                ", remark='" + remark + '\'' +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        KeepBookDTO that = (KeepBookDTO) o;
-        return Objects.equals(id, that.id) && Objects.equals(category, that.category) && Objects.equals(money, that.money) && Objects.equals(remark, that.remark);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, category, money, remark);
-    }
-
     public void setCategory(String category) {
         this.category = category;
     }
@@ -91,6 +68,32 @@ KeepBookDTO {
     public void setRemark(String remark) {
         this.remark = remark;
     }
+
+    @Override
+    public String toString() {
+        return "KeepBookDTO{" +
+                "id=" + id +
+                ", category='" + category + '\'' +
+                ", money=" + money +
+                ", remark='" + remark + '\'' +
+                '}';
+    }
+
+    //重写equals方法
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        KeepBookDTO that = (KeepBookDTO) o;
+        return Objects.equals(id, that.id) && Objects.equals(category, that.category) && Objects.equals(money, that.money) && Objects.equals(remark, that.remark);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, category, money, remark);
+    }
+
+
 
     private String remark;
 }

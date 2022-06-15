@@ -27,8 +27,9 @@ public class BookUtils {
         writableDatabase = sqlLiteUtils.getWritableDatabase();
         readableDatabase = sqlLiteUtils.getReadableDatabase();
     }
-
+    //
     public Long writeDataOfOne(KeepBookDTO bookDTO) {
+        //创建对象装存入SQLit的数据
         ContentValues values = new ContentValues();
         values.put("category", bookDTO.getCategory());
         values.put("remark", bookDTO.getRemark());
@@ -44,10 +45,10 @@ public class BookUtils {
 
     public List<KeepBookDTO> readData() {
         ArrayList<KeepBookDTO> keepBookDTOS = new ArrayList<>();
+        //从数据库中读取数据
         Cursor cursor = readableDatabase.query("keepbook", null, null, null, null, null, null);
         for (; cursor.moveToNext(); ) {
             int i1 = cursor.getColumnIndex("category");
-
             int i2 = cursor.getColumnIndex("remark");
             int i3 = cursor.getColumnIndex("money");
             int i4 = cursor.getColumnIndex("time");
@@ -66,13 +67,16 @@ public class BookUtils {
             }
 
         }
+        //返回keepBookDTOS对象
         return keepBookDTOS;
     }
 
-    public Map<String, com.keepbook.app.model.vo.BillVO> data2BillVO(List<KeepBookDTO> keepBookDTOS) {
+    //将读取数据转换成map
+    public Map<String, com.keepbook.app.model.vo.BillVO> dataToBillVO(List<KeepBookDTO> keepBookDTOS) {
         HashMap<String, com.keepbook.app.model.vo.BillVO> map = new HashMap<>();
 
         for (KeepBookDTO keepBookDTO : keepBookDTOS) {
+
             String time = simpleDateFormat.format(keepBookDTO.getTime());
             com.keepbook.app.model.vo.BillVO billVO = map.get(time);
             if (billVO == null) {
@@ -95,9 +99,11 @@ public class BookUtils {
     }
 
 
+    //算出总的收入和支出返回
     public Map<String,Float> payAndCome() {
         HashMap<String, Float> map = new HashMap<>();
-        String sql = "select (select SUM(money) from keepbook where money>0) as come,(select SUM(money) from keepbook where money<0) as pay from keepbook ";
+        String sql = "select (select SUM(money) from keepbook where money>0) as come," +
+                "(select SUM(money) from keepbook where money<0) as pay from keepbook ";
         Cursor cursor = readableDatabase.rawQuery(sql, null);
         while (cursor.moveToNext()) {
             int i1 = cursor.getColumnIndex("come");

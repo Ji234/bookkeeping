@@ -53,10 +53,16 @@ public class RecordFragment extends BaseFragment {
     /**
      * 类别 列表选中项名字
      */
+    //详细信息
     private String category;
+    //时间选择页面
     private LinearLayout btnDateSelect;
+    //记录时间
     private Date time;
+
+    //保存数据,防止数据丢失
     private DataModel dataModel;
+
     private String money;
 
     public String getCategory() {
@@ -64,7 +70,7 @@ public class RecordFragment extends BaseFragment {
     }
 
     public void setCategory(String category) {
-        Log.i("TAG", "category=" + category);
+//        Log.i("TAG", "category=" + category);
         this.category = category;
     }
 
@@ -73,15 +79,23 @@ public class RecordFragment extends BaseFragment {
 
     }
 
+
     protected void initView(View view) {
+        //
         dataModel=new ViewModelProvider(this).get(DataModel.class);
+        //
         tabControlView = (TabControlView) view.findViewById(R.id.tab_control_view);
         recordViewPager = ((MyViewPager) view.findViewById(R.id.record_view_pager));
+        //时间选择悬浮窗
         fabRecord = (FloatingActionButton) view.findViewById(R.id.fab_record);
 
+        //描述框
         editRemark = (MaterialEditText) view.findViewById(R.id.edit_remark);
+        //money框
         editMoney = (MaterialEditText) view.findViewById(R.id.edit_money);
+        //选择时间按钮
         btnDateSelect = (LinearLayout)view.findViewById(R.id.btn_date_select);
+        //选择时间按键监听
         btnDateSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,6 +107,8 @@ public class RecordFragment extends BaseFragment {
                 }).build().show();
             }
         });
+
+
         recordViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -127,11 +143,13 @@ public class RecordFragment extends BaseFragment {
 
     }
 
+    //顶部选择收入,支出
     protected void init() {
         List<Fragment> fragments = initFragments();
 
         recordViewPager.setAdapter(new FragmentAdapter<Fragment>(getActivity().getSupportFragmentManager(), fragments));
 
+        //监听器
         tabControlView.setOnTabSelectionChangedListener(new TabControlView.OnTabSelectionChangedListener() {
             @Override
             public void newSelection(String title, String value) {
@@ -187,7 +205,7 @@ public class RecordFragment extends BaseFragment {
                                 if (rows > 0) {
 
                                     XToast.success(getContext(), "记录成功").show();
-                                    new ViewModelProvider(requireActivity()).get(DataModel.class).setData(bookUtils.data2BillVO(bookUtils.readData()));
+                                    new ViewModelProvider(requireActivity()).get(DataModel.class).setData(bookUtils.dataToBillVO(bookUtils.readData()));
 
                                 } else {
                                     XToast.error(getContext(), "记录失败").show();

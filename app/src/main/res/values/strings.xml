@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">keepbook</string>
+    <string name="app_name">记账</string>
 
     <string-array name="values">
         <item>

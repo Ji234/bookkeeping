@@ -1,5 +1,6 @@
 package com.keepbook.app.model.vo;
 
+//BillVO类,读出数据
 public class BillVO {
     /**
      * 月份

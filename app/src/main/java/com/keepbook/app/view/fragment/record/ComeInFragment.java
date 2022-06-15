@@ -23,6 +23,7 @@ import java.util.List;
  */
 public class ComeInFragment extends BaseFragment {
 
+    //横向滚动,ListView
     private RecyclerView recCome;
 
     public ComeInFragment() {
@@ -31,7 +32,10 @@ public class ComeInFragment extends BaseFragment {
     private Integer mPos=-1;
     @Override
     protected void init() {
+        //GridLayoutManager网格布局管理，支持RecyclerView成为网格布局的关键。
+        //每一排数据4个
         recCome.setLayoutManager(new GridLayoutManager(getContext(), 4));
+        //分行
         recCome.setAdapter(new XRecyclerAdapter<IconTitleItem, IconItemViewHolder>(initData()) {
             @NonNull
             @Override
@@ -40,11 +44,15 @@ public class ComeInFragment extends BaseFragment {
                 return new IconItemViewHolder(view);
             }
 
+            //绑定数据
             @Override
             protected void bindData(@NonNull IconItemViewHolder holder, int position, IconTitleItem item) {
+                //数据源
                 holder.icImage.setImageResource(item.getImageId());
                 holder.icTv.setText(item.getTitle());
+                //触摸选择
                 holder.icImage.setTouchSelectModeEnabled(true);
+
                 if (mPos == position) {
                     holder.icImage.setSelected(true);
                 }else{
@@ -72,17 +80,11 @@ public class ComeInFragment extends BaseFragment {
         data.add(new IconTitleItem("分红", R.drawable.ic_earning_dividend));
         data.add(new IconTitleItem("理财", R.drawable.records_type_yundong));
         data.add(new IconTitleItem("年终奖", R.drawable.ic_earning_yearend_awards));
-
-
-
-
-
         return data;
     }
 
     @Override
     protected void initView(View view) {
-
         recCome = (RecyclerView) view.findViewById(R.id.rec_come);
 
     }

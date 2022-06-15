@@ -8,6 +8,8 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.navigation.NavigationBarView;
 import com.keepbook.app.R;
 
+
+//实现记账和账单的切换
 public class PageSelectListener implements NavigationBarView.OnItemSelectedListener {
 
     private final ViewPager mainViewpager;

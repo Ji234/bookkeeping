@@ -14,10 +14,13 @@ import com.xuexiang.xui.adapter.FragmentAdapter;
 import java.util.ArrayList;
 
 public class MainActivity extends BaseActivity {
+
     private MyViewPager mainViewpager;
     private ArrayList<Fragment> fragments;
+
     private FragmentAdapter<Fragment> fragmentAdapter;
     private BottomNavigationView bottomNavigation;
+    //记录fragment
     private RecordFragment recordFragment;
 
     @Override
@@ -46,7 +49,9 @@ public class MainActivity extends BaseActivity {
     }
     @Override
     protected void initView() {
+        //记账页面
         mainViewpager = (MyViewPager) findViewById(R.id.main_viewpager);
+        //导航栏
         bottomNavigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
     }
     @Override
