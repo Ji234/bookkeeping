@@ -10,6 +10,7 @@ import android.widget.ListView;
 
 import com.keepbook.app.R;
 
+//表格
 public class MyListView extends ListView {
     public MyListView(Context context) {
         this(context,null);

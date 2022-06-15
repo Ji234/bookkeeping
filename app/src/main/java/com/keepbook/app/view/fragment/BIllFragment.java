@@ -12,9 +12,13 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.IValueFormatter;
+import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.keepbook.app.R;
 import com.keepbook.app.model.vo.BillVO;
 import com.keepbook.app.util.BookUtils;
@@ -25,6 +29,7 @@ import com.keepbook.app.viewmodel.DataModel;
 import com.keepbook.app.wdiget.MyListView;
 import com.xuexiang.xui.adapter.listview.XListAdapter;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
@@ -63,10 +68,11 @@ public class BIllFragment extends BaseFragment {
         });
         initChart();
         adapter = new XListAdapter<BillVO>(getContext(), initData()) {
-
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
+                //账单数据
                 BillListViewHolder viewHolder;
+
                 BillVO item = getItem(position);
                 if (convertView == null) {
                     convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_bill_list, parent, false);
@@ -89,6 +95,7 @@ public class BIllFragment extends BaseFragment {
         billListview.setAdapter(adapter);
     }
 
+    //初始化 数据连接
     private Collection<BillVO> initData() {
         BookUtils bookUtils = new BookUtils(SqlLiteUtils.getInstance(getContext()));
 
@@ -98,8 +105,11 @@ public class BIllFragment extends BaseFragment {
 
     @SuppressWarnings("all")
     private void initChart() {
+
         ArrayList<PieEntry> pieEntries = new ArrayList<>();
+
         BookUtils bookUtils = new BookUtils(SqlLiteUtils.getInstance(getContext()));
+
         Map<String, Float> map = bookUtils.payAndCome();
         if (!map.isEmpty()) {
             pieEntries.add(new PieEntry(Math.abs(map.get("come")), "收入"));
@@ -109,17 +119,37 @@ public class BIllFragment extends BaseFragment {
         }
 
 
-        PieDataSet pieDataSet = new PieDataSet(pieEntries, "分类");
-        pieDataSet.setColors(Color.parseColor("#ff1744"), Color.parseColor("#00e676"));
+        //标题
+        PieDataSet pieDataSet = new PieDataSet(pieEntries, "");
+        //设置颜色
+        pieDataSet.setColors(Color.parseColor("#00e676"), Color.parseColor("#ff1744"));
         pieDataSet.setDrawValues(true);
+        //间隔
+        pieDataSet.setSliceSpace(1f);
+        pieDataSet.setHighlightEnabled(true);
+
+
+
+
         pieDataSet.setValueTextColor(Color.parseColor("#ebeee8"));
 
         PieData pieData = new PieData(pieDataSet);
 
+
+        //字体
+        pieData.setValueTextSize(12f);
+        //描述
         pieChart.setDescription(null);
 //        pieChart.setCenterText("收入:支出");
+        //中间不为空
         pieChart.setDrawHoleEnabled(false);
+
+        //设置pieChart是否只显示饼图上百分比不显示文字
+        pieChart.setDrawEntryLabels(true);
+        //设置数据
         pieChart.setData(pieData);
+
+
         pieChart.invalidate();
 
     }
