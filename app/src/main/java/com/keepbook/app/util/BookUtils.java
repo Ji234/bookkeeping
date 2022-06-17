@@ -71,7 +71,7 @@ public class BookUtils {
         return keepBookDTOS;
     }
 
-    //将读取数据转换成map
+    //将读取数据转换成map返回
     public Map<String, com.keepbook.app.model.vo.BillVO> dataToBillVO(List<KeepBookDTO> keepBookDTOS) {
         HashMap<String, com.keepbook.app.model.vo.BillVO> map = new HashMap<>();
 

@@ -55,7 +55,6 @@ public class PayFragment extends BaseFragment {
             protected IconItemViewHolder getViewHolder(@NonNull ViewGroup parent, int viewType) {
 
                 parent.setOnTouchListener(new View.OnTouchListener() {
-                    //翻页
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
 

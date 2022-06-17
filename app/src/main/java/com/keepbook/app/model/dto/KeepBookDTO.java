@@ -3,7 +3,7 @@ package com.keepbook.app.model.dto;
 import java.util.Date;
 import java.util.Objects;
 
-//KeepBookDTO类,写入数据
+//KeepBookDTO类,一笔账单数据
 public class KeepBookDTO {
     private Integer id;
     private String category;

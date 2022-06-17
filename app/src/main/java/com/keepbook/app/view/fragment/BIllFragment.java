@@ -12,13 +12,9 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.formatter.IValueFormatter;
-import com.github.mikephil.charting.formatter.ValueFormatter;
-import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.keepbook.app.R;
 import com.keepbook.app.model.vo.BillVO;
 import com.keepbook.app.util.BookUtils;
@@ -29,7 +25,6 @@ import com.keepbook.app.viewmodel.DataModel;
 import com.keepbook.app.wdiget.MyListView;
 import com.xuexiang.xui.adapter.listview.XListAdapter;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
@@ -103,7 +98,8 @@ public class BIllFragment extends BaseFragment {
 
     }
 
-    @SuppressWarnings("all")
+
+    //饼图
     private void initChart() {
 
         ArrayList<PieEntry> pieEntries = new ArrayList<>();
@@ -154,9 +150,9 @@ public class BIllFragment extends BaseFragment {
 
     }
 
-    private float dp2px(int dp) {
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, getResources().getDisplayMetrics());
-    }
+//    private float dp2px(int dp) {
+//        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, getResources().getDisplayMetrics());
+//    }
 
     @Override
     protected void initView(View view) {
