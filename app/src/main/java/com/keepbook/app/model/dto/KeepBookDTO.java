@@ -9,6 +9,7 @@ public class KeepBookDTO {
     private String category;
     private Double money;
     private Date time;
+    private String remark;
 
     public Date getTime() {
         return time;
@@ -95,5 +96,5 @@ public class KeepBookDTO {
 
 
 
-    private String remark;
+
 }

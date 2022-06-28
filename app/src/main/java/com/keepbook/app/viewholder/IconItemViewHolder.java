@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.keepbook.app.R;
 import com.xuexiang.xui.widget.imageview.RadiusImageView;
 
+//图标加文字标题
 public class IconItemViewHolder extends RecyclerView.ViewHolder {
 
     public RadiusImageView icImage;
